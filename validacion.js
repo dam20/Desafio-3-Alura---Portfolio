@@ -1,8 +1,6 @@
 // Recorrer los elementos y hacer que onchange ejecute una funcion para comprobar el valor de ese input
-
-
 var formulario = document.form;
-elementos = formulario.elements;
+var elementos = formulario.elements;
 
 // Funcion que se ejecuta cuando el evento click es activado
 
@@ -53,38 +51,43 @@ var enviar = function (e) {
 }
 
 function focusInput() {
+    //console.log(this.name + ' fue modificado')
     removeError(this);
 }
 
+
 function blurInput() {
-    // console.log(this.value);
-     //console.log(validarVacio(this.value));
-     //console.log(validarMax(this.value));
-    // console.log(this.name);
-    if (validarVacio(this.value) ) {
-        addError(this);
-        console.log('El campo ' + this.name + ' no puede estar vacio.');
+    //var mensaje="";
+   
+    if (!this.classList.contains('error') && validarVacio(this.value) ) {
+        //mensaje = 'El campo ' + this.name + ' no puede estar vacio.';
+        addError(this,mensaje);
+            // advertirError(mensaje)
     }else if(validarEmail(this)) {
+        //mensaje = 'El campo ' + this.name + ' debe tener la siguiente estructura texto@texto.com.';    
         addError(this);
-        console.log('El campo ' + this.name + ' debe tener la siguiente estructura texto@texto.com.');    
     }else if (validarMax(this.value)) {
-        addError(this);
-        console.log('El campo ' + this.name + ' no puede tener mas de 50 caracteres.');
+        //mensaje = 'El campo ' + this.name + ' no puede tener mas de 50 caracteres.';
+        addError(this,mensaje);
     } else if(validarMaxTextArea(this.value)){
-        addError(this);
-        console.log('El campo ' + this.name + ' no puede tener mas de 300 caracteres.');
+        //mensaje = 'El campo ' + this.name + ' no puede tener mas de 300 caracteres.';
+        addError(this,mensaje);
+    }else{
+        formulario.querySelector(".formcontato__botao").disabled = false;
     }
+
 }
 
-function addError(element){
+function addError(element, mensaje){
     element.parentElement.children[1].classList.remove("active");
     element.parentElement.children[1].classList.add("error");
     element.parentElement.children[0].classList.add("error");
+   // advertirError(mensaje);
 }
 
 function removeError(element) {
     element.parentElement.children[0].classList.remove("error");
-    element.parentElement.children[1].classList.remove("error");
+    element.parentElement.children[1].classList.remove("error")
     element.parentElement.children[1].classList.add("active");
 }
 
@@ -103,18 +106,22 @@ function validarMaxTextArea(valor){
 }
 
 function validarEmail(valor){
-    //const reg = [a-zA-Z0-9];
     var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    console.log(valor.name);
     if(valor.name == "email"){
-        console.log(valor.value);
-        console.log(regOficial.test(valor.value));
+        
         return !regOficial.test(valor.value);
     }else{
-        console.log(false);
         return true;
     }
 }
+
+function advertirError(mensaje){
+    console.log(mensaje);
+    //confirm(mensaje);
+    alert(mensaje);
+}
+
+
 // --- Eventos ---
 formulario.addEventListener("submit", enviar);
 

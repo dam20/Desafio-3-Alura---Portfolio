@@ -460,28 +460,14 @@ section.formcontato {
     padding: 28px 0 0 15px;
 }
 
-.formcontato__input:active,
-:focus {
-    outline: none;
-    border-bottom: 2px solid var(--azul-botones);
-}
-
-
 .formcontato__label {
     transition: all 0.3s ease;
     margin-left: 12px;
     font-size: 16px;
     line-height: 20px;
     position: absolute;
-    top: 16px;
+    top: 17px;
     left: 0;
-}
-
-.formcontato__label.active {
-    top: 8px;
-    font-size: 12px;
-    line-height: 16px;
-    color: var(--azul-botones);
 }
 
 .formcontato__textarea {
@@ -503,21 +489,51 @@ section.formcontato {
     
 }
 
+.formcontato__input:active,
+:focus {
+    outline: none;
+    border-bottom: 2px solid var(--azul-botones);
+
+}
+.formcontato__label.active {
+    top: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--azul-botones);
+}
+
 .error {
     color: #D32F2F;
     border-bottom: 2px solid #D32F2F;
 }
 
+.formcontato__label.error {
+    color: #D32F2F;
+    border: none;
+}
+
+.formcontato__input.error {
+    transition: all 0.3s ease;
+    text-indent: 5rem;
+    padding: 0;
+}
+
 .formcontato__textarea:active,
-:focus {
+ :focus {
     outline: none;
     border-bottom: 2px solid var(--azul-botones);
+}
+
+.formcontato__textarea.error {
+    transition: all 0.3s ease;
+    text-indent: 4.3rem;
+    padding-top: 17px;
 }
 
 .formcontato__botao {
     width: 144px;
     height: 51px;
-    
+
 }
 
 /*footeer*/
